@@ -22,10 +22,17 @@ clear
 clc
 
 % Correct limits as per instructions, 
+xMin = -2 * pi;
+xMax = 2 * pi;
+
+% Relatively arbitrary
+yMin = -15;
+yMax = 15;
+
 % specificity of 10000 to ensure fine details are resolved
-% user-modifiable for desired resolution
 resolution = 10000;
-x = linspace(-2 * pi, 2 * pi, resolution);
+
+x = linspace(xMin, xMax, resolution);
 
 % ensures functions do not overwrite each other
 hold on;
@@ -43,8 +50,8 @@ xlabel("Angles (radian)");
 ylabel("Voltage (V)");
 
 % Sets limits for the x and y axes
-xlim([-2 * pi, 2 * pi]);
-ylim([-15, 15]);
+xlim([xMin, xMax]);
+ylim([yMin, yMax]);
 
 % Creates a legend
 legend('Function 1','Function 2','Function 3');

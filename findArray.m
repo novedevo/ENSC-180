@@ -9,3 +9,5 @@ mean(array);
 median(array);
 std(array);
 sort(array);
+
+disp(array)
