@@ -24,20 +24,27 @@ C = [1 -1; 4 7; 9 5];
 
 %% Performing matrix operations
 
-results01 = A + B;
-results02 = A - 2*B;
-results03 = A * C;
-results04 = A';
-results05 = A * A';
-results06 = C * C';
-results07 = inv(A) * inv(B);
-results08 = [rank(A), rank(C)];
-results09 = det(A);
-results10 = A \ C;
+disp('A + B is:')
+disp(A + B)
 
-%% Printing results
+disp ('A - 2B is:')
+disp(A - 2*B)
 
-for ii = 1:10
-    fprintf('The matrix result of operation %d is: \n', ii)
-    results(ii)
-end
+disp('AC is:')
+disp(A * C)
+
+disp('The transpose of A is:')
+disp(A')
+
+disp('A times its transpose is:')
+disp(A * A')
+
+disp('C times its transpose is:')
+disp(C * C')
+
+disp('A's inverse times B's inverse is:')
+disp(inv(A) * inv(B);
+rank(A);
+rank(C);
+det(A);
+A \ C;

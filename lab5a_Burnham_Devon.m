@@ -24,20 +24,44 @@ C = [1 -1; 4 7; 9 5];
 
 %% Performing matrix operations
 
-results{01} = A + B;
-results{02} = A - 2*B;
-results{03} = A * C;
-results{04} = A';
-results{05} = A * A';
-results{06} = C * C';
-results{07} = inv(A) * inv(B);
-results{08} = {'Rank of A:', 'Rank of C:'; rank(A), rank(C)};
-results{09} = det(A);
-results{10} = A \ C;
+% Question a)
+disp('A + B is:')
+disp(A + B)
 
-%% Printing results
+% Question b)
+disp ('A - 2B is:')
+disp(A - 2*B)
 
-for ii = 1:10
-    fprintf('The result of operation %d is: \n', ii)
-    disp(results{ii})
-end
+% Question c)
+disp('AC is:')
+disp(A * C)
+
+% Question d)
+disp('The transpose of A is:')
+disp(A')
+
+% Question e)
+disp('A multiplied by its transpose is:')
+disp(A * A')
+
+% Question f)
+disp('C multiplied by its transpose is:')
+disp(C * C')
+
+% Question g)
+disp("A's inverse times B's inverse is:")
+disp(inv(A) * inv(B));
+
+% Question h)
+disp('The rank of A is:')
+disp(rank(A))
+disp('The rank of C is:')
+disp(rank(C))
+
+% Question i)
+disp('The determinant of A is:')
+disp(det(A))
+
+% Question j)
+disp('The solution of the equation system Ax = C is')
+disp(A \ C)
