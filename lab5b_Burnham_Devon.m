@@ -17,3 +17,20 @@
 %############################################################################
 
 %% Begin Function
+
+
+function addAndMultiplyTwoMatrices(A,B)
+    if (size(A) == size(B))
+        disp('A + B is:')
+        disp(A + B)
+    else
+        disp('Matrices could not be added due to incompatible sizes.')
+    end
+    
+    try
+        disp('A multiplied by B is:')
+        disp(A*B)
+    catch
+        disp('Not a valid operation!')
+        disp('Are your matrices of the right size?')
+    end
