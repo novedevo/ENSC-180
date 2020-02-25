@@ -21,7 +21,7 @@ rl=input("Enter the real part of a complex number: ");
 comp=input("Enter the imaginary part of a complex number: ");
 
 %% Create complex number from user-given input
-z=rl+comp*1i;
+z=rl+comp*1i;l1
 
 %% Print below data to screen, showing the magnitude and phase.
 fprintf("The magnitude and phase of %d + %di is\n", real(z), imag(z))
