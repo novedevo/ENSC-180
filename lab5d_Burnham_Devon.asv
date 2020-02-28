@@ -9,7 +9,7 @@
 % Due date: 2020/02/29
 %
 % Author: Devon Sawatsky Burnham
-% Input: The same matrices as Lab 5A (sest by default here)
+% Input: Two matrices (defaults to the same matrices as lab 5a)
 % Output: Solved linear system
 % I pledge that I have completed the programming assignment independently.
 % I have not copied the code from a student or any source.
@@ -19,29 +19,40 @@
 %############################################################################
 
 % Begin function
+% Takes exactly zero or two matrices as arguments
 function solveLinSystem(varargin)
 
+    %% Control logic to verify argument number and assign variables as needed
     if ~nargin
-        % defining default matrices
+        % defining default matrices if no input is given
         A = [4 3 1; 3 7 -1; 1 -1 9];
         b = [1 -1; 4 7; 9 5];
     elseif nargin==2
         % If two arguments are given
         A=varargin{1};
         b=varargin{2};
-    end
-    
-    % Find the row-reduced echelon form of A (superfluous)
-    R = rref(A);
+    else
+        disp('Invalid number of arguments. Exiting...')
+        return
+    end    
 
+    %% Main operations
     if rank(A) < size(A)
         disp("Zero rows exist, thus no unique solution exists. Quitting...")
     else
-        disp("No zero rows exist, thus a unique solution exists")
-        x = A\b;    % Built-in MATLAB operator to solve linear systems robustly
-        disp('Unique solution: {x} =')
-        disp(x);
+        disp("No zero rows exist, thus a unique solution exists.")
+        x1 = A\b;    % Built-in MATLAB operator to solve linear systems robustly
+                    % Could also use linsolve or multiply by the inverse
+        % Find the row-reduced echelon form of A | b
+        R = rref([A b]);
+        
+        % Final columns of rref(A)
+        x2 = R(:, (rank(R)+1 : end));
+        
+        disp('Solution from MATLAB built-in solver: {x} =')
+        disp(x1)
+        
+        disp('Solution from row reduction: {x} =')
+        disp(x2) 
     end
 end
-
-

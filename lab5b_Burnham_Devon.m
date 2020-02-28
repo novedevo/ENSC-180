@@ -16,12 +16,11 @@
 % Sign here: Devon Sawatsky Burnham
 %############################################################################
 
-%% Begin Function
-
+% Begin Function
 % Function is known as the name of the file, not this title.
 function addAndMultiplyTwoMatrices(A,B)
     
-    % Checks if matrices can be added
+    % Check if matrices can be added
     if (size(A) == size(B))
         disp('A + B is:')
         disp(A + B)
@@ -36,6 +35,7 @@ function addAndMultiplyTwoMatrices(A,B)
     try
         disp('A multiplied by B is:')
         disp(A*B)
+        
     catch % This block is run when an error occurs in the try block.
           % In this case, that is usually when the matrices are not the
           % right size.

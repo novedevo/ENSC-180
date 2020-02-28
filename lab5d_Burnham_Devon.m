@@ -34,18 +34,25 @@ function solveLinSystem(varargin)
     else
         disp('Invalid number of arguments. Exiting...')
         return
-    end
-    
-    % Find the row-reduced echelon form of A (superfluous)
-    R = rref(A);
+    end    
 
     %% Main operations
     if rank(A) < size(A)
         disp("Zero rows exist, thus no unique solution exists. Quitting...")
     else
-        disp("No zero rows exist, thus a unique solution exists")
-        x = A\b;    % Built-in MATLAB operator to solve linear systems robustly
-        disp('Unique solution: {x} =')
-        disp(x);
+        disp("No zero rows exist, thus a unique solution exists.")
+        x1 = A\b;    % Built-in MATLAB operator to solve linear systems robustly
+                    % Could also use linsolve or multiply by the inverse
+        % Find the row-reduced echelon form of A | b
+        R = rref([A b]);
+        
+        % Final columns of rref([A|b])
+        x2 = R(:, (rank(R)+1 : end));
+        
+        disp('Solution from MATLAB built-in solver: {x} =')
+        disp(x1)
+        
+        disp('Solution from row reduction: {x} =')
+        disp(x2) 
     end
 end
