@@ -20,20 +20,25 @@
 
 % Begin function
 % Takes exactly zero or two matrices as arguments
+% varargin, nargin, etc are defined by MATLAB documentation
 function solveLinSystem(varargin)
 
     %% Control logic to verify argument number and assign variables as needed
     if ~nargin
-        % defining default matrices if no input is given
+        % Defines default matrices if no input is given
+        % These matrices are the same as in lab 5a, matrices A and C
         A = [4 3 1; 3 7 -1; 1 -1 9];
         b = [1 -1; 4 7; 9 5];
+        
     elseif nargin==2
         % If two arguments are given
         A=varargin{1};
         b=varargin{2};
+        
     else
         disp('Invalid number of arguments. Exiting...')
         return
+        
     end    
 
     %% Main operations

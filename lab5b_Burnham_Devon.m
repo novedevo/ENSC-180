@@ -16,7 +16,7 @@
 % Sign here: Devon Sawatsky Burnham
 %############################################################################
 
-% Begin Function
+%% Begin Function
 % Function is known as the name of the file, not this title.
 function addAndMultiplyTwoMatrices(A,B)
     
@@ -31,7 +31,7 @@ function addAndMultiplyTwoMatrices(A,B)
     % Line break
     disp(' ')
     
-    % Tries to multiply the matrices
+    %% Tries to multiply the matrices
     try
         disp('A multiplied by B is:')
         disp(A*B)
