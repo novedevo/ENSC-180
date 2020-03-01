@@ -19,17 +19,39 @@
 %% Defining variables
 A = [4 3 1; 3 7 -1; 1 -1 9]; % Same as in lab 5A
 [eigVec,eigVal] = eig(A);  % Eigenvalues of A
-rootNum = 0;    % Counter for approximation
-precision = 1e4;% linspace divisions, 1e6 works well
+rootNum = 0;     % Counter for approximation function
+
+% linspace divisions: 1e6 works quickly, anything above 1e7 slows down
+% For reference, on my computer 1e7 takes 1.6s, whereas 1e8 takes 14.4s.
+% 1e7 is already accurate within 7 figures.
+precision = 1e7; 
+
+% Eigenvectors as determined from outside of MATLAB; see other documents
 eigVecsByHand = [[-4.3670;2.7537;1] [1.1647;1.484;1] [-0.1311;-0.5710;1]];
 
 %% Approximating script
 % As we were informed in class on Friday, we can use MATLAB to approximate
-% the roots as long as we don't use roots() or equivalent functions
+% the roots as long as we don't use roots() or equivalent functions.
+% This uses a naive method of approximation, it would be more efficient to
+% use Newton's method or similar.
 
 for ii = linspace(1,10, precision)
-                                  % 1 and 10 were chosen arbitrarily at
-                                  % first, but work well for this cubic.
+     % 1 and 10 were chosen arbitrarily at
+     % first, but work well for this cubic.
+                           
+                                  
+    % Uncomment this block to enable significantly faster approximation
+    % However, this only works when you already know roughly what the roots
+    % are going to be. As such, it is left disabled by default.
+    %if ii<1.8 || (ii>=1.9 && ii<=8.6) || (ii>=8.7 && ii<=9.4)
+    %    continue
+    %end
+    
+    % Skips some of the calculation if the function is not close to zero.
+    if abs(cub(ii))>=1e3/precision
+        continue
+    end
+    
     if rootNum >= 3
         disp('Max roots for a cubic found!');
         disp(' ');
@@ -49,9 +71,7 @@ for ii = linspace(1,10, precision)
     if rootFound
         rootNum = rootNum + 1;
         fprintf('Root %d found! The approximate value is %f\n', rootNum, ii+5/precision)
-        %disp(ii+5/precision);     % halfway between the two values
         fprintf('This compares to the MATLAB-found eigenvalue of %f\n\n', eigVal(rootNum,rootNum));
-        %disp(eigVal(rootNum,rootNum));
     end
 end
 
@@ -69,7 +89,6 @@ disp('Eigenvectors as found by row reduction, one eigenvector per column')
 disp(eigVecsByHand);
 disp('Eigenvectors as found by MATLAB, after scalar multiplication')
 disp(eigVecsScaled);
-
 
 %% Function corresponding to the determinant of [A]-?[I] as found by hand
 function [y] = cub(alpha)
