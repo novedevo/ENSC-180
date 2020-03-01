@@ -48,7 +48,7 @@ for ii = linspace(1,10, precision)
     %end
     
     % Skips some of the calculation if the function is not close to zero.
-    if abs(cub(ii))>=1e3/precision
+    if abs(cub(ii))>= 1e3/precision
         continue
     end
     
@@ -69,7 +69,7 @@ for ii = linspace(1,10, precision)
     end
     
     if rootFound
-        rootNum = rootNum + 1;
+        rootNum = rootNum + 1; % increment
         fprintf('Root %d found! The approximate value is %f\n', rootNum, ii+5/precision)
         fprintf('This compares to the MATLAB-found eigenvalue of %f\n\n', eigVal(rootNum,rootNum));
     end

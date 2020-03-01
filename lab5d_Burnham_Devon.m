@@ -18,10 +18,12 @@
 % Sign here: Devon Sawatsky Burnham
 %############################################################################
 
-% Begin function
+%% Begin function
 % Takes exactly zero or two matrices as arguments
 % varargin, nargin, etc are defined by MATLAB documentation
-function solveLinSystem(varargin)
+% If given zero arguments, this solves Q1(j) as instructed.
+% If given two matrices A and b, it solves the linear system Ax=b for x
+function solveLinSys(varargin)
 
     %% Control logic to verify argument number and assign variables as needed
     if ~nargin
@@ -42,7 +44,9 @@ function solveLinSystem(varargin)
     end    
 
     %% Main operations
-    % rank() automatically calculates the rank of the reduced matrix
+    
+    % rank() automatically calculates the rank of the matrix after Gaussian
+    % elimination
     if rank(A) < size(A)
         disp("Zero rows exist, thus no unique solution exists. Quitting...")
         return
@@ -52,19 +56,20 @@ function solveLinSystem(varargin)
         x1 = A\b;    % Built-in MATLAB operator to solve linear systems robustly
                      % Could also use linsolve or multiply by the inverse
         
-        % Find the row-reduced echelon form of A | b
-            % Note: I could also have written my own rref() function, but I wouldn't
-            % be any more efficient than the MATLAB-written function, visible
-            % with the command 'edit rref'
+        % Method 2: Gaussian elimination
+        % Find the row-reduced echelon form of A | b by Gauss elimination
+            % Note: I could also have written my own Gaussian row-reduction 
+            % function, but I wouldn't be any more efficient than the 
+            % MATLAB built-in function, visible with the command 'edit rref'
         R = rref([A b]);
         
-        % Final columns of rref([A|b])
+        % Final columns of rref([A b])
         x2 = R(:, (rank(R)+1:end));
         
         disp('Solution from MATLAB built-in solver: {x} =')
         disp(x1)
         
-        disp('Solution from Gauss Elimination: {x} =')
+        disp('Solution from Gaussian elimination: {x} =')
         disp(x2) 
     end
 end

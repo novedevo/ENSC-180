@@ -18,9 +18,12 @@
 % Sign here: Devon Sawatsky Burnham
 %############################################################################
 
-% Begin function
+%% Begin function
 % Takes exactly zero or two matrices as arguments
-function solveLinSystem(varargin)
+% varargin, nargin, etc are defined by MATLAB documentation
+% If given zero arguments, this solves Q1(j) as instructed.
+% If given two matrices A and b, it solves the linear system Ax=b for x
+function solveLinSys(varargin)
 
     %% Control logic to verify argument number and assign variables as needed
     if ~nargin
@@ -31,8 +34,8 @@ function solveLinSystem(varargin)
         
     elseif nargin==2
         % If two arguments are given
-        A=varargin{1};
-        b=varargin{2};
+        A = varargin{1};
+        b = varargin{2};
         
     else
         disp('Invalid number of arguments. Exiting...')
@@ -41,22 +44,32 @@ function solveLinSystem(varargin)
     end    
 
     %% Main operations
+    
+    % rank() automatically calculates the rank of the matrix after Gaussian
+    % elimination
     if rank(A) < size(A)
         disp("Zero rows exist, thus no unique solution exists. Quitting...")
+        return
     else
         disp("No zero rows exist, thus a unique solution exists.")
+        
         x1 = A\b;    % Built-in MATLAB operator to solve linear systems robustly
-                    % Could also use linsolve or multiply by the inverse
-        % Find the row-reduced echelon form of A | b
+                     % Could also use linsolve or multiply by the inverse
+        
+        % Method 2: Gaussian elimination
+        % Find the row-reduced echelon form of A | b by Gauss elimination
+            % Note: I could also have written my own rref() function, but I wouldn't
+            % be any more efficient than the MATLAB buii function, visible
+            % with the command 'edit rref'
         R = rref([A b]);
         
-        % Final columns of rref([A|b])
-        x2 = R(:, (rank(R)+1 : end));
+        % Final columns of rref([A b])
+        x2 = R(:, (rank(R)+1:end));
         
         disp('Solution from MATLAB built-in solver: {x} =')
         disp(x1)
         
-        disp('Solution from row reduction: {x} =')
+        disp('Solution from Gaussian elimination: {x} =')
         disp(x2) 
     end
 end

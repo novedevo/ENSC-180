@@ -20,12 +20,6 @@
 % Function is known as the name of the file, not this title.
 function addAndMultiplyTwoMatrices(A,B)
     
-    % This shouldn't be necessary, but it helps with robustness
-    if ~nargin
-        disp('No arguments!')
-        return
-    end
-    
     % Check if matrices can be added
     try
         if (size(A) == size(B))
@@ -34,13 +28,10 @@ function addAndMultiplyTwoMatrices(A,B)
         else
             disp('Matrices could not be added due to incompatible sizes.')
         end
-    catch ME
+    catch
         disp('An error occurred when adding your matrices.')
-        disp('The sizes were the same, so something else went wrong.')
-        disp('If it helps, the error message was as follows:')
-        disp(ME)
-    end
-        
+        disp('The sizes were the same, so something else w
+    
     % Line break
     disp(' ')
     
@@ -49,10 +40,10 @@ function addAndMultiplyTwoMatrices(A,B)
         disp('A multiplied by B is:')
         disp(A*B)
         
-    catch     % This block is run when an error occurs in the try block.
-              % In this case, that is usually when the matrices are not the
-              % right size.
+    catch % This block is run when an error occurs in the try block.
+          % In this case, that is usually when the matrices are not the
+          % right size.
         disp('Not a valid operation!')
-        disp('Are your matrices compatible sizes?')
+        disp('Are your matrices of the right size?')
     end
 end

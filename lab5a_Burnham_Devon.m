@@ -63,5 +63,5 @@ disp('The determinant of A is:')
 disp(det(A))
 
 % Question j)
-disp('The solution of the equation system Ax = C is')
+disp('The solution of the equation system [A]{x} = [C] is: {x} =')
 disp(A \ C)
