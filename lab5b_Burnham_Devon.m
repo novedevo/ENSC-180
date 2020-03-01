@@ -42,3 +42,4 @@ function addAndMultiplyTwoMatrices(A,B)
         disp('Not a valid operation!')
         disp('Are your matrices of the right size?')
     end
+end
