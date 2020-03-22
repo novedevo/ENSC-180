@@ -18,7 +18,7 @@
 
 %% Defining variables
 A = [4 3 1; 3 7 -1; 1 -1 9]; % Same as in lab 5A
-[eigVec,eigVal] = eig(A);  % Eigenvalues of A
+[eigVecs,eigVals] = eig(A);  % Eigenvalues of A
 rootNum = 0;     % Counter for approximation function
 
 % linspace divisions: 1e6 works quickly, anything above 1e7 slows down
@@ -27,7 +27,9 @@ rootNum = 0;     % Counter for approximation function
 precision = 1e7; 
 
 % Eigenvectors as determined from outside of MATLAB; see other documents
-eigVecsByHand = [[-4.3670;2.7537;1] [1.1647;1.484;1] [-0.1311;-0.5710;1]];
+eigVecsByHand = [[-4.3670; 2.7537;  1]...
+                 [1.1647;  1.484;   1]...
+                 [-0.1311; -0.5710; 1]];
 
 %% Approximating script
 % As we were informed in class on Friday, we can use MATLAB to approximate
@@ -70,8 +72,10 @@ for ii = linspace(1,10, precision)
     
     if rootFound
         rootNum = rootNum + 1; % increment
-        fprintf('Root %d found! The approximate value is %f\n', rootNum, ii+5/precision)
-        fprintf('This compares to the MATLAB-found eigenvalue of %f\n\n', eigVal(rootNum,rootNum));
+        fprintf('Root %d found! The approximate value is %f\n',...
+            rootNum, ii+5/precision);
+        fprintf('This compares to the MATLAB-found eigenvalue of %f\n\n',...
+            eigVals(rootNum,rootNum));
     end
 end
 
@@ -79,9 +83,10 @@ end
 % Preallocating space for greater speed
 eigVecsScaled = zeros(3);
 for ii = 1:3
-    eigVecsScaled(:,ii) = eigVec(:,ii)/eigVec(3,ii);
+    eigVecsScaled(:,ii) = eigVecs(:,ii) / eigVecs(3,ii);
     % This normalizes the eigenvectors found by MATLAB to match the
     % formatting of the vectors found by hand, without changing their value.
+    % An eigenvector multiplied by a scalar is the same eigenvector.
 end
 
 %% Comparing eigenvectors
